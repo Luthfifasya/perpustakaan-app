@@ -5,14 +5,18 @@ import (
 	"log"
 	"os"
 
+	"perpustakaan-app/database"
 	"perpustakaan-app/routes"
 
 	"github.com/gin-gonic/gin"
 )
 
 func main() {
-	r := gin.Default()
+	//inisialisasi database
+	database.InitDB()
 
+	//setup router
+	r := gin.Default()
 	routes.SetupRoutes(r)
 
 	port := os.Getenv("PORT")
