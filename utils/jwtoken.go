@@ -1,12 +1,15 @@
 package utils
 
 import (
+	"os"
 	"time"
+
+	"golang.org/x/crypto/bcrypt"
 
 	"github.com/golang-jwt/jwt/v5"
 )
 
-var jwtKey = []byte("secretkey123") // ganti dengan secret yang lebih aman
+var jwtKey = []byte(os.Getenv("JWT_SECRET"))
 
 type JWTClaim struct {
 	Username string `json:"username"`
@@ -45,4 +48,14 @@ func ValidateToken(signedToken string) (*JWTClaim, error) {
 	}
 
 	return claims, nil
+}
+
+func HashPassword(password string) (string, error) {
+	bytes, err := bcrypt.GenerateFromPassword([]byte(password), 14)
+	return string(bytes), err
+}
+
+func CheckPasswordHash(password, hash string) bool {
+	err := bcrypt.CompareHashAndPassword([]byte(hash), []byte(password))
+	return err == nil
 }

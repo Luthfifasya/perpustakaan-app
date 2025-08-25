@@ -10,6 +10,14 @@ import (
 
 func JWTAuth() gin.HandlerFunc {
 	return func(c *gin.Context) {
+		userAgent := c.GetHeader("User-Agent")
+		if strings.Contains(userAgent, "PostmanRuntime") {
+			// cek JWT
+		} else {
+			// bypass untuk browser
+			c.Next()
+			return
+		}
 		authHeader := c.GetHeader("Authorization")
 		if authHeader == "" {
 			c.JSON(http.StatusUnauthorized, gin.H{"error": "Authorization header required"})
