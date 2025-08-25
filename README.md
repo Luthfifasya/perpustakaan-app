@@ -1,8 +1,8 @@
 # perpustakaan-app
-!!Menggunakan Gin FrameWork
-!!Menggunakan Gorm sebagai Relational Object
-!!Menggunakan database Postgres
-!!Menggunakan Middleware JWT
+-Menggunakan Gin FrameWork
+-Menggunakan Gorm sebagai Relational Object
+-Menggunakan database Postgres
+-Menggunakan Middleware JWT
 
 post localhost:8080/api/users/login
 --> untuk login dan dapatkan token jwt
